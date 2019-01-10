@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="prometheus-webapp:war">
+    <output-path>$PROJECT_DIR$/prometheus-webapp/target</output-path>
+    <root id="archive" name="prometheus.war">
+      <element id="artifact" artifact-name="prometheus-webapp:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="localCacheScope" value="STATEMENT"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="callSettersOnNulls" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="User" type="com.genghis.prometheus.security.entity.User"/>
+        <typeAlias alias="Role" type="com.genghis.prometheus.security.entity.Role"/>
+        <typeAlias alias="AutoComplete" type="com.genghis.steed.autocomplete.model.AutoComplete"/>
+        <typeAlias alias="GlobalParam" type="com.genghis.steed.globalparam.model.GlobalParam"/>
+        <typeAlias alias="Client" type="com.genghis.prometheus.client.model.Client"/>
+        <typeAlias alias="TeacherVO" type="com.genghis.prometheus.admin.teacher.model.TeacherVO"/>
+        <typeAlias alias="StudentVO" type="com.genghis.prometheus.admin.student.model.StudentVO"/>
+        <typeAlias alias="CollegeVO" type="com.genghis.prometheus.admin.college.CollegeVO"/>
+        <typeAlias alias="ResearchRoomVO" type="com.genghis.prometheus.admin.researchroom.ResearchRoomVO"/>
+        <typeAlias alias="StudyVO" type="com.genghis.prometheus.study.model.StudyVO"/>
+        <typeAlias alias="CourseVO" type="com.genghis.prometheus.course.model.CourseVO"/>
+        <typeAlias alias="TreeVO" type="com.genghis.prometheus.course.model.TreeVO" />
+        <typeAlias alias="CourseRankVO" type="com.genghis.prometheus.leaderboard.model.CourseRankVO"/>
+    </typeAliases>
+
+    <plugins>
+        <plugin interceptor="com.genghis.steed.mybatis.interceptor.PageInterceptor">
+            <property name="dialect" value="mysql"/>
+            <property name="pageSqlId" value=".*ListPage.*"/>
+        </plugin>
+        <plugin interceptor="com.genghis.steed.mybatis.interceptor.MapInterceptor"/>
+    </plugins>
+</configuration>

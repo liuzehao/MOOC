@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.genghis.prometheus.course.dao.CourseDao">
+     <select id="getTreeAll" resultType="hashmap">
+        SELECT t.root_id,t.name,t.title,t.tree_id id,t.parent_id pId,t.url treeUrl,t.num treeNum,s.icon icon,flag
+        FROM student_state s JOIN sys_tree t ON s.tree_id = t.tree_id WHERE course_id = #{courseId} AND student_id = #{studentId}
+        ORDER BY num
+     </select>
+    <select id="getStudyInfo" resultType="StudyVO">
+        SELECT b.course_name,a.course_time,a.total_score
+        FROM student_course a,course b
+        WHERE a.student_id = #{studentId} AND a.course_id = #{courseId} AND b.course_id = a.course_id
+    </select>
+    <update id="updateInfo">
+        UPDATE student_state t
+        SET
+        flag = #{flag}, icon = #{icon}
+        WHERE tree_id = #{id}
+    </update>
+   </mapper>

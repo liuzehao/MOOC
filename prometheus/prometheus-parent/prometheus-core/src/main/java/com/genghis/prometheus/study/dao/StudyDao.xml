@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.genghis.prometheus.study.dao.StudyDao">
+    
+    <select id="getPersonStudyCourseList" resultType="StudyVO" >
+        SELECT course_name,course_time,a.course_id,study_progress_rate
+        FROM student_course a,course b WHERE a.student_id = #{studentId} AND a.course_Id = b.course_Id;
+    </select>
+
+    <select id="getCourseInfoList" resultType="CourseVO">
+        SELECT * FROM course;
+    </select>
+    <select id="getStudyHistoryList" resultType="StudyVO">
+        SELECT student_id,course_name,a.course_id,title,logout_time
+        FROM student_course a,course b ,sys_tree s WHERE a.student_id = #{studentId} AND a.course_Id = b.course_Id AND a.course_id = s.root_id AND num IN (SELECT MAX(num)
+        FROM student_state s JOIN sys_tree t ON s.tree_id = t.tree_id WHERE course_id = root_id AND student_id = #{studentId} AND flag =1 GROUP BY course_id)
+    </select>
+</mapper>

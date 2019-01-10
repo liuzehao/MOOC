@@ -1,0 +1,25 @@
+.coverDiv{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    opacity: 0.6;
+    display: none;
+    filter: alpha(opacity=60);
+    z-index:10000
+}
+.coverSpan{
+    font-size: 12px;
+    /*width:160px;*/
+    height: 16px;
+    padding-left:20px;
+    position: absolute;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    z-index:10001
+}
+
+.coverSpanBack{
+    background: url("wait.gif") no-repeat scroll left center transparent;
+}

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.genghis.prometheus.admin.teacher.dao.TeacherDao">
+    <resultMap id="teacherInfo" type="TeacherVO">
+        <result property="teacherId" column="teacher_id"/>
+        <result property="teacherName" column="teacher_name"/>
+        <result property="collegeVO.collegeName" column="college_name"/>
+        <result property="researchRoomVO.researchRoomName" column="research_room_name"/>
+        <result property="collegeVO.collegeId" column="college_Id"/>
+        <result property="researchRoomVO.researchRoomId" column="research_room_Id"/>
+        <result property="courseVO.courseId" column="course_id"/>
+        <result property="courseVO.courseName" column="course_name"/>
+        <result property="email" column="email"/>
+        <result property="telephone" column="telephone"/>
+    </resultMap>
+    <select id="getTeacherInfoList" resultMap="teacherInfo">
+        SELECT
+        a.teacher_id,teacher_name,college_name,a.college_id,a.research_room_id,research_room_name,d.course_id,course_name,email,telephone
+        FROM teacher a,college b,research_room c,teacher_course d,course e
+        WHERE a.college_id=b.college_id AND a.research_room_id=c.research_room_id AND a.teacher_id = d.teacher_id
+        AND d.course_id = e.course_id
+        <if test="teacherId !=null and teacherId !=''">
+            AND a.teacher_id = #{teacherId}
+        </if>
+        <if test="teacherName !=null and teacherName !=''">
+            AND a.teacher_name = #{teacherName}
+        </if>
+    </select>
+
+    <insert id="addTeacherInfo">
+        INSERT INTO teacher
+        (teacher_id,teacher_name,college_id,research_room_id,email,telephone)
+        VALUES
+        (#{teacherId},#{teacherName},#{collegeVO.collegeId},#{researchRoomVO.researchRoomId},#{email},#{telephone});
+    </insert>
+
+    <insert id="addTeacherCourseInfo">
+        INSERT INTO teacher_course
+        (teacher_id,course_id)
+        VALUES
+        (#{teacherId},#{courseVO.courseId})
+    </insert>
+
+    <delete id="deleteManyTeacherInfo">
+        DELETE FROM teacher WHERE teacher_id IN
+        <foreach collection="teacherIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>;
+    </delete>
+
+    <delete id="deleteManyTeacherCourseInfo">
+        DELETE FROM teacher_course WHERE teacher_id IN
+        <foreach collection="teacherIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteTeacherInfo">
+        DELETE FROM teacher WHERE teacher_id=#{teacherId};
+    </delete>
+
+    <delete id="deleteTeacherCourseInfo">
+        DELETE FROM teacher_course WHERE teacher_id=#{teacherId}
+    </delete>
+
+    <select id="showTeacherInfo" resultMap="teacherInfo">
+        SELECT
+        a.teacher_id,teacher_name,college_name,a.college_id,a.research_room_id,research_room_name,d.course_id,course_name,email,telephone
+        FROM teacher a,college b,research_room c,teacher_course d,course e
+        WHERE a.college_id=b.college_id AND a.research_room_id=c.research_room_id AND a.teacher_id = d.teacher_id
+        AND d.course_id = e.course_id AND a.teacher_id=#{teacherId}
+    </select>
+
+    <update id="updateTeacherInfo">
+        UPDATE teacher
+        SET
+        teacher_id=#{teacherId},
+        teacher_name=#{teacherName},
+        college_id=#{collegeVO.collegeId},
+        research_room_id=#{researchRoomVO.researchRoomId},
+        email=#{email},
+        telephone=#{telephone}
+        WHERE teacher_id = #{teacherId};
+    </update>
+
+    <update id="updateTeacherCourseInfo">
+         UPDATE teacher_course
+        SET
+        course_id = #{courseVO.courseId}
+        WHERE
+        teacher_id = #{teacherId}
+    </update>
+
+    <select id="checkTeacherId" resultType="java.lang.Integer">
+        SELECT COUNT(teacher_id)
+        FROM teacher
+        WHERE teacher_id = #{teacherId}
+    </select>
+</mapper>

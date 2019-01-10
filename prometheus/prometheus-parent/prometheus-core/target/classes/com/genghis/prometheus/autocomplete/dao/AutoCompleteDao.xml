@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.genghis.prometheus.autocomplete.dao.AutoCompleteDao">
+
+    <select id="getClientAutoCompleteList" resultType="AutoComplete">
+        select id,client_name name
+        from client
+    </select>
+
+    <select id="getStaticCollegeName" resultType="AutoComplete">
+        SELECT college_id id ,college_name name
+        FROM college
+    </select>
+
+    <select id="getStaticResearchRoomName" resultType="AutoComplete">
+        SELECT research_room_id id ,research_room_name name
+        FROM research_room
+    </select>
+
+    <select id="getStaticCourseName" resultType="AutoComplete">
+        SELECT course_id id,course_name name
+        FROM course
+    </select>
+
+    <select id="getStaticProfessionName" resultType="AutoComplete">
+        SELECT profession_id id,profession_name name
+        FROM profession
+    </select>
+
+</mapper>

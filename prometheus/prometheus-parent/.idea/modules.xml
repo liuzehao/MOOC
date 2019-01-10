@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/prometheus-core/prometheus-core.iml" filepath="$PROJECT_DIR$/prometheus-core/prometheus-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prometheus-parent.iml" filepath="$PROJECT_DIR$/prometheus-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/prometheus-webapp/prometheus-webapp.iml" filepath="$PROJECT_DIR$/prometheus-webapp/prometheus-webapp.iml" />
+    </modules>
+  </component>
+</project>

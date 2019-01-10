@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="GBK" standalone="no"?>
+<!DOCTYPE  mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.genghis.prometheus.admin.student.dao.StudentDao">
+
+    <resultMap id="studentInfo" type="StudentVO">
+        <result property="studentId" column="student_id"/>
+        <result property="studentName" column="student_name"/>
+        <result property="collegeVO.collegeId" column="college_id"/>
+        <result property="collegeVO.collegeName" column="college_name"/>
+        <result property="professionVO.professionId" column="profession_id"/>
+        <result property="professionVO.professionName" column="profession_name"/>
+        <result property="email" column="email"/>
+        <result property="studentNikeName" column="student_nike_name"/>
+    </resultMap>
+
+    <select id="getStudentInfoList" resultMap="studentInfo">
+        SELECT student_id,student_name,a.college_id,college_name,a.profession_id,profession_name,email
+        FROM student a,college b,profession c WHERE 1=1
+        AND a.college_id = b.college_id AND a.profession_id = c.profession_id
+        <if test="studentId !=null and studentId !=''">
+            AND student_id = #{studentId}
+        </if>
+        <if test="studentName !=null and studentName !=''">
+            AND student_name = #{studentName}
+        </if>
+    </select>
+
+    <select id="getStudentInfo" resultMap="studentInfo">
+        SELECT student_id,student_name,a.college_id,college_name,a.profession_id,profession_name,email,student_nike_name
+        FROM student a,college b,profession c
+        WHERE a.college_id = b.college_id AND a.profession_id = c.profession_id AND student_id = #{studentId}
+    </select>
+
+    <insert id="addStudentInfo">
+        INSERT INTO student
+        (student_id,student_name,college_id,profession_id,email)
+        VALUES
+        (#{studentId},#{studentName},#{collegeVO.collegeId},#{professionVO.professionId},#{email});
+    </insert>
+
+    <delete id="deleteManyStudentInfo">
+        DELETE FROM student WHERE student_id IN
+    <foreach collection="studentIds" index="index" item="item" open="(" separator="," close=")">
+        #{item}
+    </foreach>;
+
+    </delete>
+
+    <delete id="deleteManyStudentCourseInfo">
+        DELETE FROM student_course WHERE student_id IN
+        <foreach collection="studentIds" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <select id="showStudentInfo" resultMap="studentInfo">
+        SELECT student_id,student_name,a.college_id,college_name,a.profession_id,profession_name,email
+        FROM student a,college b,profession c WHERE a.student_id = #{studentId}
+        AND a.college_id = b.college_id AND a.profession_id = c.profession_id
+    </select>
+
+    <update id="updateStudentInfo">
+        UPDATE student
+        SET
+        student_id=#{studentId},
+        student_name=#{studentName},
+        college_id=#{collegeVO.collegeId},
+        profession_id=#{professionVO.professionId},
+        email=#{email}
+        WHERE student_id = #{studentId}
+    </update>
+
+    <select id="checkStudentId" resultType="java.lang.Integer">
+        SELECT COUNT(student_id)
+        FROM student
+        WHERE student_id = #{studentId}
+    </select>
+
+    <insert id="adduser">
+        INSERT INTO createuser
+        (userid,password)
+        VALUES
+        (#{username},#{password})
+    </insert>
+</mapper>

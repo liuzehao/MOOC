@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD iBatis Mapper 3.0 //EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.genghis.prometheus.security.dao.RoleDao">
+
+    <select id="findAllRoleNamesByLoginName" resultType="string">
+        SELECT r.role_name FROM sys_role r,sys_user u
+        WHERE r.role_id=u.role_id
+        AND u.login_name=#{loginName}
+    </select>
+
+    <select id="findAllRolePermTokensByLoginName" resultType="string">
+        SELECT rp.perm_token FROM acl_role_permission rp,sys_user u
+        WHERE u.role_id=rp.role_id
+        AND u.login_name=#{loginName}
+    </select>
+</mapper>

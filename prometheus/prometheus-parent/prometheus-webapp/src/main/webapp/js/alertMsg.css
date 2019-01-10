@@ -1,0 +1,23 @@
+/*alert样式*/
+.alertMsg{display: block;left:50%;margin-left:-150px;overflow: hidden;position: absolute;width:300px;z-index: 10001}
+.alertContent{border:solid #b8d0d6;border-width:0 1px;display: block;overflow: hidden;padding: 5px 5px 1px;background: none repeat scroll 0 0 #eef4f5;}
+.alertMsg .alertError .alertInner {background: none repeat scroll 0 0 #FEFACF;border-color: #E50000;}
+.alertMsg .alertWarn .alertInner {background: none repeat scroll 0 0 #FEFACF;border-color: #E83E09;}
+.alertMsg .alertSuccess .alertInner,.alertMsg .alertInfo .alertInner{background: none repeat scroll 0 0 #FEFACF;border-color: #B8D0D6;}
+.alertMsg .alertInner{border: 1px solid;display: block;padding: 0 9px 9px;text-align: left;}
+.alertMsg .alertError h1 {background-position: 2px -42px;}
+.alertMsg .alertWarn h1,.alertMsg .alertInfo h1{background-position: 2px 8px;}
+.alertMsg .alertSuccess h1 {background-position: 2px -92px;}
+.alertMsg h1 {font-weight:bold;border: solid #cccccc;border-width:0 0 1px;display: block;height: 30px;line-height: 30px;margin-bottom: 10px;overflow: hidden;padding: 0 0 0 25px;background: url("alertpanel_icon.png") no-repeat scroll 0 0 transparent}
+.alertMsg .alertInner .msg {line-height: 1.3em;margin: 10px;max-height: 200px;}
+.alertMsg .toolBar {display: block;height: 25px;overflow: hidden;padding-top: 5px;text-align: right;}
+.alertMsg .toolBar ul {float: right;list-style: none outside none;}
+.alertMsg .toolBar li {float: left;}
+.alertMsg .toolBar .button{margin-left: 5px;}
+/*.alertMsg .button,.alertMsg .button span{background: url("./images/button_s.png") no-repeat scroll 0 0 transparent;}*/
+.alertMsg .button {display: block;float: left;height: 25px;overflow: hidden;padding-left: 5px;}
+.alertMsg .button span {background-position: 100% -50px;cursor: pointer;padding: 0 10px 0 5px;display: block;float: left;font-weight: bold;height: 25px;line-height: 25px;overflow: hidden;color: #183152;}
+.alertMsg .alertFooter {background-position: 0 0;padding-left: 5px;}
+/*.alertMsg .alertFooter, .alertMsg .alertFooter_r, .alertMsg .alertFooter_c {background: url("./images/alertpanel.png") no-repeat scroll 0 0 transparent;}*/
+.alertMsg .alertFooter_r {background-position: 100% -50px;padding-right: 5px;}
+.alertMsg .alertFooter_c {background-position: 0 -100px;background-repeat: repeat-x;padding: 0;display: block;height: 5px;overflow: hidden;}
